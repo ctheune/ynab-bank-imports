@@ -1,7 +1,6 @@
 # YNAB bank import conversion scripts
 
-This package provides conversions from bank-specific CSV formats to the `You
-need a budget <http://www.youneedabudget.com/>`_ CSV format.
+This package provides conversions from bank-specific CSV formats to the [You need a Budget](http://www.youneedabudget.com/) CSV format.
 
 The gloa is to allow simply dopping CSV files into an INBOX, run the processing
 script, and receive converted files with only unseen transactions for you to
