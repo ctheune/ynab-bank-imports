@@ -10,15 +10,15 @@ import into YNAB. But that's a work in progress.
 
     $ hg clone https://bitbucket.org/ctheune/ynab-bank-imports
     $ cd ynab-bank-imports
-    $ virtualenv-2.7 .
+    $ virtualenv --python=python3.3 .
     $ bin/python bootstrap
     $ bin/buildout
-
 
 ## Usage
 
 
-    $ bin/ynab_bank_import (ing_checking|dkb_checking|dkb_creditcard) <downloaded.csv> <target_directory>
+    $ bin/ynab_bank_import (ing_checking|dkb_checking|dkb_creditcard) \
+                           <downloaded.csv> <target_directory>
 
 This will turn a downloaded CSV file into a duplicate-free new YNAB csv file in
 the target directory.
