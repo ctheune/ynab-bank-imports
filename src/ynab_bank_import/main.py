@@ -12,8 +12,8 @@ def main():
 
     args = parser.parse_args()
 
-    importer = pkg_resources.iter_entry_points(
-        'ynab_accounts', name=args.accounttype)
+    importer = next(pkg_resources.iter_entry_points(
+        'ynab_accounts', name=args.accounttype)).load()
 
     store = YNABStore(args.output_directory)
     print("%s transactions already seen" %
