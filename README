@@ -17,10 +17,15 @@ $ virtualenv-2.7 .
 $ bin/python bootstrap
 $ bin/buildout
 
-Configuration
-=============
 
-XXX
+Usage
+=====
+
+$ bin/ynab_bank_import (ing_checking|dkb_checking|dkb_creditcard) <downloaded.csv> <target_directory>
+
+This will turn a downloaded CSV file into a duplicate-free new YNAB csv file in
+the target directory.
+
 
 Supported banks and accounts
 ============================
@@ -29,7 +34,8 @@ Germany
 -------
 
 * ING DIBA checking accounts
-* DKB checking and credit card accounts
+* DKB checking
+* DKB credit card accounts
 
 If you'd like to add your own bank, have a look at the existing scripts, write
 some code and tests and submit a pull request. :)
