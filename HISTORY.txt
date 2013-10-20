@@ -1,0 +1,14 @@
+Changes
+=======
+
+0.1 (unreleased)
+----------------
+
+* Convert my private collection into a Python package.
+
+  Features: 
+
+  * import German ING DIBA checking accounts
+  * import German DKB checking and credit card accounts
+  * detect duplicates to keep imports small
+  * keep archive of conversions
