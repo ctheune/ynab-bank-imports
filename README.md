@@ -22,11 +22,10 @@ Installation
 Usage
 =====
 
-$ bin/ynab_bank_import (ing_checking|dkb_checking|dkb_creditcard) <downloaded.csv> <target_directory>
+    $ bin/ynab_bank_import (ing_checking|dkb_checking|dkb_creditcard) <downloaded.csv> <target_directory>
 
 This will turn a downloaded CSV file into a duplicate-free new YNAB csv file in
 the target directory.
-
 
 Supported banks and accounts
 ============================
