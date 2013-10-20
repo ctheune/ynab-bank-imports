@@ -2,20 +2,21 @@
 YNAB bank import
 ================
 
-This package provides conversions for bank-specific CSV formats.
+This package provides conversions from bank-specific CSV formats to the `You
+need a budget <http://www.youneedabudget.com/>`_ CSV format.
 
-It allows to simply drop the CSV files into an INBOX, run the processing script,
-and receive converted files with only unseen transactions in account-specific
-folders.
+The gloa is to allow simply dopping CSV files into an INBOX, run the processing
+script, and receive converted files with only unseen transactions for you to
+import into YNAB. But that's a work in progress.
 
 Installation
 ============
 
-$ hg clone https://bitbucket.org/ctheune/ynab-bank-imports
-$ cd ynab-bank-imports
-$ virtualenv-2.7 .
-$ bin/python bootstrap
-$ bin/buildout
+    $ hg clone https://bitbucket.org/ctheune/ynab-bank-imports
+    $ cd ynab-bank-imports
+    $ virtualenv-2.7 .
+    $ bin/python bootstrap
+    $ bin/buildout
 
 
 Usage
