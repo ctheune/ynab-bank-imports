@@ -8,3 +8,4 @@ eggs
 develop-eggs
 .installed.cfg
 .Python
+*.pyc

@@ -28,6 +28,7 @@ class Transaction(object):
         result = {}
         for field in self.fields:
             result[field] = clean(str(getattr(self, field)))
+        return result
 
 
 class YNABStore(object):
