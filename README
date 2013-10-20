@@ -1,0 +1,35 @@
+================
+YNAB bank import
+================
+
+This package provides conversions for bank-specific CSV formats.
+
+It allows to simply drop the CSV files into an INBOX, run the processing script,
+and receive converted files with only unseen transactions in account-specific
+folders.
+
+Installation
+============
+
+$ hg clone https://bitbucket.org/ctheune/ynab-bank-imports
+$ cd ynab-bank-imports
+$ virtualenv-2.7 .
+$ bin/python bootstrap
+$ bin/buildout
+
+Configuration
+=============
+
+XXX
+
+Supported banks and accounts
+============================
+
+Germany
+-------
+
+* ING DIBA checking accounts
+* DKB checking and credit card accounts
+
+If you'd like to add your own bank, have a look at the existing scripts, write
+some code and tests and submit a pull request. :)
