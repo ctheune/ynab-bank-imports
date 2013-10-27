@@ -8,7 +8,7 @@ setup(
     author_email='ct@gocept.com',
     description='YNAB bank import conversion scripts',
     long_description=(
-        open('README').read() + '\n' +
+        open('README.md').read() + '\n' +
         open('HISTORY.txt').read()),
     license='BSD 2-clause',
     entry_points="""
