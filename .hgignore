@@ -9,3 +9,4 @@ develop-eggs
 .installed.cfg
 .Python
 *.pyc
+*.sublime-workspace
