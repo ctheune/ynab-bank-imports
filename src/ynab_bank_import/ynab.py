@@ -33,8 +33,8 @@ class Transaction(object):
 
 class YNABStore(object):
 
-    def __init__(self, path):
-        self.path = path
+    def __init__(self, output):
+        self.output = output
         self.transactions = []
         self.written = 0
         self.ignored = 0
@@ -46,13 +46,13 @@ class YNABStore(object):
         return Transaction()
 
     def scan_existing(self):
-        for seen in glob.glob(os.path.join(self.path, '*.csv')):
+        for seen in glob.glob('{}*.csv'.format(self.output)):
             self.transactions.extend(
                 csv.DictReader(open(seen, encoding='latin1')))
 
     def setup_writer(self):
         stamp = datetime.datetime.now().strftime('%Y-%m-%dT%H%M%S')
-        self.output_file = os.path.join(self.path, '%s.csv' % stamp)
+        self.output_file = '{}-{}.csv'.format(self.output,  stamp)
         if os.path.exists(self.output_file):
             raise RuntimeError('Output file collision: %s' % self.output_file)
         f = open(self.output_file, 'w', newline='', encoding='utf-8')

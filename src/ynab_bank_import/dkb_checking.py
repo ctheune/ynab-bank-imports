@@ -25,7 +25,7 @@ def do_import(filename, ynab):
     dkb_file.seek(0)
 
     for record in csv.DictReader(dkb_file, dialect=DKBCSV):
-        t = ynab.new_record()
+        t = ynab.new_transaction()
         t.Date = record['Buchungstag'].replace('.', '/')
         t.Payee = record['Auftraggeber / Begünstigter ']
         t.Memo = record['Verwendungszweck']
