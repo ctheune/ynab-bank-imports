@@ -10,8 +10,7 @@ import into YNAB. But that's a work in progress.
 
     $ hg clone https://bitbucket.org/ctheune/ynab-bank-imports
     $ cd ynab-bank-imports
-    $ virtualenv --python=python3.3 .
-    $ bin/python bootstrap
+    $ ./bootstrap.sh
     $ bin/buildout
 
 ## Configuration
