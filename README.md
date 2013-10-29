@@ -33,7 +33,7 @@ The 'accounts.cfg' file looks like this (with my account numbers blanked away):
     [dkb-giro]
     type = dkb_checking
     input = incoming/1234567890.csv
- 
+
     [dkb-visa-christian]
     type = dkb_creditcard
     input = incoming/1234________6789.csv
