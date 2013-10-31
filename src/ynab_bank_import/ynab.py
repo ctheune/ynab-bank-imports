@@ -1,9 +1,9 @@
 # YNAB CSV format specific code
 import csv
 import datetime
-import re
 import glob
 import os.path
+import re
 
 
 class YNABCSV(csv.Dialect):
