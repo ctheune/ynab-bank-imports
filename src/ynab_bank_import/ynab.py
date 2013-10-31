@@ -2,6 +2,7 @@
 import csv
 import datetime
 import glob
+import io
 import os.path
 import re
 
@@ -72,3 +73,15 @@ class YNABStore(object):
             return
         self.writer.writerow(transaction)
         self.written += 1
+
+    @staticmethod
+    def skipped_input(bank_file, condition):
+        bank_file_filtered = io.StringIO()
+        for line in bank_file:
+            if condition(line):
+                bank_file_filtered.write(line)
+                break
+        for line in bank_file:
+            bank_file_filtered.write(line)
+        bank_file_filtered.seek(0)
+        return bank_file_filtered
