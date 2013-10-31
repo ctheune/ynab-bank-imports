@@ -46,6 +46,12 @@ The 'accounts.cfg' file looks like this (with my account numbers blanked away):
     type  = ing_checking
     input = incoming/Umsatzanzeige_1234567890_*.csv
 
+    [comdirect-giro]
+    type  = comdirect_account
+    input = incoming/umsaetze_123545679_*.csv
+    match = tze Girokonto
+
+
 You can put shell-style globbing in the incoming filenames to support banks that
 generate filenames with timestamps.
 
@@ -88,6 +94,7 @@ files.
 * ING DIBA checking accounts
 * DKB checking
 * DKB credit card accounts
+* .comdirect accounts and credit cards.
 
 If you'd like to add your own bank, have a look at the existing scripts, write
 some code and tests and submit a pull request. :)
