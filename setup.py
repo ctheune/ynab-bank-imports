@@ -19,6 +19,8 @@ setup(
     ing_checking = ynab_bank_import.ing_checking:do_import
     dkb_creditcard = ynab_bank_import.dkb_cc:do_import
     dkb_checking = ynab_bank_import.dkb_checking:do_import
+    comdirect_checking = ynab_bank_import.comdirect:import_account
+    comdirect_cc = ynab_bank_import.comdirect:import_cc
     """,
     keywords='import bank accounting personal finance',
     zip_safe=False,
