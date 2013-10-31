@@ -11,11 +11,11 @@ def import_one(importer, input, output):
         store = YNABStore(output)
         print("%s transactions already seen" % len(store.transactions))
         importer(file, store)
-        os.unlink(file)
+        os.remove(file)
 
         if store.written == 0:
-            os.unlink(store.output_file)
             print("No new transactions.")
+            os.remove(store.output_file)
         else:
             print("Output file: {}".format(store.output_file))
             print("{} new transactions. {} ignored transactions.".format(
