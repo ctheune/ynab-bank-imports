@@ -1,4 +1,5 @@
 from .ynab import YNABStore
+import argparse
 import configparser
 import glob
 import os
@@ -23,9 +24,14 @@ def import_one(importer, input, output):
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        'configuration', default='accounts.cfg', nargs='?',
+        help='Account configuration file. Default: accounts.cfg')
+    args = parser.parse_args()
 
     config = configparser.ConfigParser()
-    config.read('accounts.cfg')
+    config.read(args.configuration)
 
     for section in config.sections():
         print("Importing {}".format(section))
