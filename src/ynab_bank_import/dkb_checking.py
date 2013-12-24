@@ -27,7 +27,7 @@ def do_import(filename, ynab):
 
     for record in csv.DictReader(dkb_file, dialect=DKBCSV):
         t = ynab.new_transaction()
-        t.Date = record['Wertstellung'].replace('.', '/')
+        t.Date = record['Wertstellung '].replace('.', '/')
         t.Payee = record[u'Auftraggeber / Beguenstigter ']
         t.Memo = record['Verwendungszweck']
         amount = decimal.Decimal(
