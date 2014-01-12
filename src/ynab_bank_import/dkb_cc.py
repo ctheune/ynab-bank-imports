@@ -3,6 +3,13 @@ import decimal
 import io
 
 
+payee_map = {
+    'HabenzinsenZ': 'DKB',
+    'Lastschrift': '-',
+    'Einzahlung': '-',
+}
+
+
 class DKBCSV(csv.Dialect):
     delimiter = ';'
     quotechar = '"'
@@ -25,9 +32,17 @@ def do_import(filename, ynab):
 
     for record in csv.DictReader(dkb_file, dialect=DKBCSV):
         t = ynab.new_transaction()
-        t.Date = record['Belegdatum'].replace('.', '/')
-        t.Payee = '-'
-        t.Memo = record['Umsatzbeschreibung']
+        t.Date = record['Wertstellung'].replace('.', '/')
+        payee = record['Umsatzbeschreibung'].split(' ')[0]
+        payee = payee_map.get(payee, payee)
+        if payee == '-':
+            memo = record['Umsatzbeschreibung']
+        t.Payee = payee
+        if ' ' in record['Umsatzbeschreibung']:
+            memo = ' '.join(record['Umsatzbeschreibung'].split(' ')[1:])
+        else:
+            memo = record['Umsatzbeschreibung']
+        t.Memo = memo
         amount = decimal.Decimal(record['Betrag (EUR)'].replace('.', '').
                                  replace(',', '.'))
         if amount < 0:
