@@ -27,7 +27,11 @@ def import_account(filename, ynab):
             break
         t = ynab.new_transaction()
         t.Date = record['Buchungstag'].replace('.', '/').replace(' Neu', '')
-        t.Payee, t.Memo = record['Buchungstext'].split('Buchungstext: ', 1)
+        if 'Buchungstext: ' in record['Buchungstext']:
+            t.Payee, t.Memo = record['Buchungstext'].split('Buchungstext: ', 1)
+        else:
+            t.Payee = record['Vorgang']
+            t.Memo = record['Buchungstext']
         t.Payee = re.sub('^(Auftraggeber|Empfänger):', '', t.Payee)
         amount = decimal.Decimal(record['Umsatz in EUR'].replace(',', '.'))
         t.Inflow = amount  # negative inflow == outflow.
