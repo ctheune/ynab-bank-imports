@@ -21,6 +21,7 @@ setup(
     dkb_checking = ynab_bank_import.dkb_checking:do_import
     comdirect_checking = ynab_bank_import.comdirect:import_account
     comdirect_cc = ynab_bank_import.comdirect:import_cc
+    mt940_csv = ynab_bank_import.mt940:import_account
     """,
     keywords='import bank accounting personal finance',
     zip_safe=False,
