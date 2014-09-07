@@ -12,7 +12,7 @@ class DKBCSV(csv.Dialect):
 
 
 def do_import(filename, ynab):
-    dkb_file = open(filename, newline='', encoding='utf-8')
+    dkb_file = open(filename, newline='', encoding='latin1')
 
     # Remove superfluous data from dkb file until the transaction log starts.
     dkb_file_filtered = io.StringIO()
@@ -27,8 +27,8 @@ def do_import(filename, ynab):
 
     for record in csv.DictReader(dkb_file, dialect=DKBCSV):
         t = ynab.new_transaction()
-        t.Date = record['Wertstellung '].replace('.', '/')
-        t.Payee = record[u'Auftraggeber / Beguenstigter ']
+        t.Date = record['Wertstellung'].replace('.', '/')
+        t.Payee = record[u'Auftraggeber / Begünstigter']
         t.Memo = record['Verwendungszweck']
         amount = decimal.Decimal(
             record['Betrag (EUR)'].replace('.', '').replace(',', '.'))
