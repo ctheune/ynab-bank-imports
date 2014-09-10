@@ -96,6 +96,7 @@ files.
 * DKB credit card accounts
 * .comdirect accounts and credit cards.
 * MT940-CSV format (Sparkasse)
+* FIDUCIA-CSV format (Volksbank, BBBank, Sparda-Bank, ...)
 
 If you'd like to add your own bank, have a look at the existing scripts, write
 some code and tests and submit a pull request. :)
