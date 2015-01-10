@@ -23,6 +23,7 @@ setup(
     comdirect_cc = ynab_bank_import.comdirect:import_cc
     mt940_csv = ynab_bank_import.mt940:import_account
     fiducia_csv = ynab_bank_import.fiducia:import_account
+    sparkasse_cc = ynab_bank_import.sparkasse:import_cc
     """,
     keywords='import bank accounting personal finance',
     zip_safe=False,
