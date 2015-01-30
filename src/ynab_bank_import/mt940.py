@@ -20,7 +20,7 @@ def import_account(filename, ynab):
     for record in csv.DictReader(bank_file, dialect=Dialect):
         log.debug("Importing %s", record)
         t = ynab.new_transaction()
-        t.Date = record['Buchungstag'].replace('.', '/').replace(' Neu', '')
+        t.Date = record['Valutadatum'].replace('.', '/').replace(' Neu', '')
         t.Payee = record['Beguenstigter/Zahlungspflichtiger']
         t.Memo = record['Verwendungszweck']
         t.Inflow = record['Betrag'].replace(',', '.')

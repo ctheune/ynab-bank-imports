@@ -16,7 +16,7 @@ def import_cc(filename, ynab):
 
     for record in csv.DictReader(csv_file, dialect=CCDialect):
         t = ynab.new_transaction()
-        t.Date = record['Buchungsdatum'].replace('.', '/')
+        t.Date = record['Belegdatum'].replace('.', '/')
         t.Payee = record['Transaktionsbeschreibung']
         t.Memo = record['Transaktionsbeschreibung Zusatz']
         amount = decimal.Decimal(record['Buchungsbetrag'].replace('.', '').
