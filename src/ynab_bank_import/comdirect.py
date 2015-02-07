@@ -25,6 +25,9 @@ def import_account(filename, ynab):
         log.debug("Importing %s", record)
         if not record['Buchungstext']:
             break
+        if record['Buchungstag'] == 'offen':
+            # Ignore not-yet-booked entries.
+            continue
         t = ynab.new_transaction()
         t.Date = record['Buchungstag'].replace('.', '/').replace(' Neu', '')
         if 'Buchungstext: ' in record['Buchungstext']:
