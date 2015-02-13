@@ -23,5 +23,7 @@ def import_account(filename, ynab):
         t.Date = record['Valutadatum'].replace('.', '/').replace(' Neu', '')
         t.Payee = record['Beguenstigter/Zahlungspflichtiger']
         t.Memo = record['Verwendungszweck']
+        if 'SVWZ+' in t.Memo:
+            _, t.Memo = t.Memo.split('SVWZ+')
         t.Inflow = record['Betrag'].replace(',', '.')
         ynab.record_transaction(t)
