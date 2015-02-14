@@ -5,6 +5,7 @@ import glob
 import logging
 import os
 import pkg_resources
+import re
 
 
 log = logging.getLogger(__name__)
@@ -14,9 +15,10 @@ def import_one(importer, input, output,
                content_match=None,
                remove_input=False):
     for filename in glob.glob(input):
-        if (content_match and
-                content_match not in open(filename, encoding='latin1').read()):
-            continue
+        if content_match:
+            content = open(filename, encoding='latin1').read()
+            if not re.search(content_match, content, re.DOTALL):
+                continue
 
         log.info("Input file {}".format(filename))
         store = YNABStore(output)
