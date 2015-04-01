@@ -38,8 +38,13 @@ def import_account(filename, ynab):
         t.Payee = re.sub('^(Auftraggeber|Empfänger):', '', t.Payee)
         if 'Kto/IBAN' in t.Payee:
             t.Payee, _ = t.Payee.split('Kto/IBAN')
+        try:
+            amount = record['Umsatz in EUR']
+        except KeyError:
+            # Another bug in comdirects export system #fail
+            amount = record['Umsatz in {0}']
         amount = decimal.Decimal(
-            record['Umsatz in EUR'].replace('.', '').replace(',', '.'))
+            amount.replace('.', '').replace(',', '.'))
         t.Inflow = amount  # negative inflow == outflow.
         ynab.record_transaction(t)
 
@@ -61,6 +66,11 @@ def import_cc(filename, ynab):
             t.Payee, t.Memo = text.split('  ', 1)
         else:
             t.Memo = text
-        amount = decimal.Decimal(record['Umsatz in EUR'].replace(',', '.'))
+        try:
+            amount = record['Umsatz in EUR']
+        except KeyError:
+            # Another bug in comdirects export system #fail
+            amount = record['Umsatz in {0}']
+        amount = decimal.Decimal(amount.replace(',', '.'))
         t.Inflow = amount  # negative inflow == outflow.
         ynab.record_transaction(t)
