@@ -59,7 +59,7 @@ def import_cc(filename, ynab):
         log.debug("Importing %s", record)
         text = record['Buchungstext']
         if not text:
-            break
+            continue
         t = ynab.new_transaction()
         t.Date = record['Buchungstag'].replace('.', '/').replace(' Neu', '')
         if '  ' in text:
