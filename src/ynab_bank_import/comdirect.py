@@ -61,7 +61,7 @@ def import_cc(filename, ynab):
         if not text:
             continue
         t = ynab.new_transaction()
-        t.Date = record['Buchungstag'].replace('.', '/').replace(' Neu', '')
+        t.Date = record['Umsatztag'].replace('.', '/').replace(' Neu', '')
         if '  ' in text:
             t.Payee, t.Memo = text.split('  ', 1)
         else:
