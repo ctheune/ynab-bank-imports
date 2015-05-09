@@ -61,10 +61,7 @@ class YNABStore(object):
         self.writer.writeheader()
 
     def seen(self, transaction):
-        for seen in self.transactions:
-            if seen == transaction:
-                return True
-        return False
+        return transaction in self.transactions
 
     def record_transaction(self, transaction):
         transaction = transaction.prepare()
