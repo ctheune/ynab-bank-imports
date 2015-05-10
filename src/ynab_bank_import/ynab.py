@@ -53,9 +53,12 @@ class YNABStore(object):
 
     def setup_writer(self):
         stamp = datetime.datetime.now().strftime('%Y-%m-%dT%H%M%S')
-        self.output_file = '{}-{}.csv'.format(self.output,  stamp)
-        if os.path.exists(self.output_file):
-            raise RuntimeError('Output file collision: %s' % self.output_file)
+        serial = 0
+        self.output_file = '{}-{}-{}.csv'.format(self.output, stamp, serial)
+        while os.path.exists(self.output_file):
+            serial += 1
+            self.output_file = '{}-{}-{}.csv'.format(
+                self.output, stamp, serial)
         f = open(self.output_file, 'w', newline='', encoding='utf-8')
         self.writer = csv.DictWriter(f, Transaction.fields)
         self.writer.writeheader()
