@@ -26,8 +26,12 @@ def do_import(filename, ynab):
     for record in csv.DictReader(dkb_file, dialect=DKBCSV):
         t = ynab.new_transaction()
         t.Date = record['Wertstellung'].replace('.', '/')
-        t.Payee = record['Umsatzbeschreibung']
-        t.Memo = record['Umsatzbeschreibung']
+        if 'Beschreibung' in record:
+            memo_key = 'Beschreibung'
+        else:
+            memo_key = 'Umsatzbeschreibung'
+        t.Payee = record[memo_key]
+        t.Memo = record[memo_key]
         amount = decimal.Decimal(record['Betrag (EUR)'].replace('.', '').
                                  replace(',', '.'))
         if amount < 0:
