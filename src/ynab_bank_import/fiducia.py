@@ -22,7 +22,7 @@ def import_account(filename, ynab):
 
     for record in csv.DictReader(bank_file, dialect=Dialect):
         # Skipping last lines "Anfangssaldo" and "Endsaldo"
-        if (record['Währung'] == "Anfangssaldo" or record['Währung'] == "Endsaldo" or record['Währung'] is None):
+        if (record['Kundenreferenz'] == "Anfangssaldo" or record['Kundenreferenz'] == "Endsaldo" or record['Währung'] is None):
             continue
 
         t = ynab.new_transaction()
