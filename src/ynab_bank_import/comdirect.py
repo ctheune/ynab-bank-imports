@@ -71,6 +71,6 @@ def import_cc(filename, ynab):
         except KeyError:
             # Another bug in comdirects export system #fail
             amount = record['Umsatz in {0}']
-        amount = decimal.Decimal(amount.replace(',', '.'))
+        amount = decimal.Decimal(amount.replace('.', '').replace(',', '.'))
         t.Inflow = amount  # negative inflow == outflow.
         ynab.record_transaction(t)
