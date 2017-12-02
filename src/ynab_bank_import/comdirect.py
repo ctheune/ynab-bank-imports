@@ -35,7 +35,7 @@ def import_account(filename, ynab):
         else:
             t.Payee = record['Vorgang']
             t.Memo = record['Buchungstext']
-        t.Payee = re.sub('^(Auftraggeber|Empfänger):', '', t.Payee)
+        t.Payee = re.sub(r'^\s*(Auftraggeber|Empfänger):\s*', '', t.Payee)
         if 'Kto/IBAN' in t.Payee:
             t.Payee, _ = t.Payee.split('Kto/IBAN')
         try:
@@ -57,15 +57,12 @@ def import_cc(filename, ynab):
 
     for record in csv.DictReader(bank_file, dialect=Dialect):
         log.debug("Importing %s", record)
-        text = record['Buchungstext']
+        text = record['Buchungstext'].strip()
         if not text:
             continue
         t = ynab.new_transaction()
         t.Date = record['Umsatztag'].replace('.', '/').replace(' Neu', '')
-        if '  ' in text:
-            t.Payee, t.Memo = text.split('  ', 1)
-        else:
-            t.Memo = text
+        t.Payee = text
         try:
             amount = record['Umsatz in EUR']
         except KeyError:
