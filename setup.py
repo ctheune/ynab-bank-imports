@@ -17,6 +17,7 @@ setup(
 
     [ynab_accounts]
     ing_checking = ynab_bank_import.ing_checking:do_import
+    ing_aut_checking = ynab_bank_import.ing_aut_checking:do_import
     dkb_creditcard = ynab_bank_import.dkb_cc:do_import
     dkb_checking = ynab_bank_import.dkb_checking:do_import
     comdirect_checking = ynab_bank_import.comdirect:import_account
