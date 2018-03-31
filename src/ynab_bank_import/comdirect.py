@@ -57,7 +57,9 @@ def import_cc(filename, ynab):
 
     for record in csv.DictReader(bank_file, dialect=Dialect):
         log.debug("Importing %s", record)
-        text = record['Buchungstext'].strip()
+        text = record['Buchungstext']
+        if text:
+            text = text.strip()
         if not text:
             continue
         t = ynab.new_transaction()
