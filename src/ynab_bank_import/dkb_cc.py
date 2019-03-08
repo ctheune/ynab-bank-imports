@@ -25,6 +25,10 @@ def do_import(filename, ynab):
 
     for record in csv.DictReader(dkb_file, dialect=DKBCSV):
         t = ynab.new_transaction()
+        if not record['Belegdatum']:
+            # This is the a not-yet-detailed amount of money that has been
+            # acquired but not booked completely.
+            continue
         t.Date = record['Wertstellung'].replace('.', '/')
         if 'Beschreibung' in record:
             memo_key = 'Beschreibung'
