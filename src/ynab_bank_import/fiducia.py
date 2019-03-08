@@ -28,12 +28,51 @@ def import_account(filename, ynab):
         t = ynab.new_transaction()
         t.Date = record['Buchungstag']
         t.Payee = record['Empfänger/Zahlungspflichtiger']
-        t.Memo = record['Vorgang/Verwendungszweck'].replace('\n', ' ')
+
+        type_, subject = record['Vorgang/Verwendungszweck'].split('\n', maxsplit=1)
+        subject = subject.replace('\n', '')
+
+        identifier = ''
+        if type_ == 'EURO-Ueberw. SEPA':
+            subject = subject.replace(': ', ':')
+            try:
+                subject = subject.replace('BIC:', ' BIC:')
+            except ValueError:
+                pass
+            try:
+                subject = subject.replace('IBAN:', ' IBAN:')
+            except ValueError:
+                pass
+            subject = subject.replace('  ', ' ')
+
+            try:
+                split = subject.index('TAN:')
+                subject, meta = subject[:split].strip(), subject[split:].strip()
+                tan, iban, bic = meta.split(' ')
+            except ValueError:
+                tan = ''
+
+            identifier = tan
+        elif type_ == 'Dauerauftrag':
+            split = subject.index('/*') # marker for which dauerauftrag
+            subject, identifier = subject[:split].strip(), subject[split:].strip()
+            identifier = identifier.split('*', maxsplit=1)[0]
+        elif type_ == 'Überweisungsgutschr.':
+            try:
+                split = subject.index('IBAN:')
+                subject = subject[:split].strip()
+            except ValueError:
+                pass
+        else:
+            # Dauerauftrag
+            raise ValueError(f"Unknown transaction type `{type_}`")
+
+        t.Memo = (subject + ' ' + identifier).strip()
 
         amount = decimal.Decimal(
             record['Umsatz'].replace('.', '').replace(',', '.'))
 
-        # Last column indicates postive / negative amount
+        # Last column indicates positive / negative amount
         if record[' '] == 'S':
             t.Outflow = amount
         else:
