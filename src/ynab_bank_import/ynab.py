@@ -31,6 +31,14 @@ class Transaction(object):
             result[field] = clean(str(getattr(self, field)))
         return result
 
+    def __eq__(self, other):
+        if not isinstance(other, Transaction):
+            return False
+        for field in self.fields:
+            if getattr(self, field) != getattr(other, field):
+                return False
+        return True
+
 
 class YNABStore(object):
 
@@ -49,7 +57,7 @@ class YNABStore(object):
     def scan_existing(self):
         for seen in glob.glob('{}*.csv'.format(self.output)):
             self.transactions.extend(
-                csv.DictReader(open(seen, encoding='latin1')))
+                csv.DictReader(open(seen, encoding='utf-8')))
 
     def setup_writer(self):
         stamp = datetime.datetime.now().strftime('%Y-%m-%dT%H%M%S')
