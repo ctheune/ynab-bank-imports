@@ -63,8 +63,21 @@ def import_account(filename, ynab):
                 subject = subject[:split].strip()
             except ValueError:
                 pass
+        elif type_ == 'Lastschrift':
+            subject = subject.replace(': ', ':')
+            subject = subject.replace('  ', ' ')
+            try:
+                split = subject.index('EREF:')
+                subject, meta = subject[:split].strip(), subject[split:].strip()
+                eref, mref, cred, iban = meta.split(' ')
+            except ValueError:
+                tan = ''
+            pass
+        elif type_ == 'Abschluss':
+            pass
+        elif type_ == 'Scheckeinreichung Ev':
+            subject, identifier = '', ''
         else:
-            # Dauerauftrag
             raise ValueError(f"Unknown transaction type `{type_}`")
 
         t.Memo = (subject + ' ' + identifier).strip()
