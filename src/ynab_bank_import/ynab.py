@@ -47,9 +47,14 @@ class YNABStore(object):
         self.transactions = []
         self.written = 0
         self.ignored = 0
+        self._out_f = None
 
         self.scan_existing()
         self.setup_writer()
+
+    def close(self):
+        if self._out_f:
+            self._out_f.close()
 
     def new_transaction(self):
         return Transaction()
@@ -67,8 +72,8 @@ class YNABStore(object):
             serial += 1
             self.output_file = '{}-{}-{}.csv'.format(
                 self.output, stamp, serial)
-        f = open(self.output_file, 'w', newline='', encoding='utf-8')
-        self.writer = csv.DictWriter(f, Transaction.fields)
+        self._out_f = open(self.output_file, 'w', newline='', encoding='utf-8')
+        self.writer = csv.DictWriter(self._out_f, Transaction.fields)
         self.writer.writeheader()
 
     def seen(self, transaction):

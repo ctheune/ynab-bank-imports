@@ -24,6 +24,8 @@ def import_one(importer, input, output,
         store = YNABStore(output)
         log.info("%s transactions already seen" % len(store.transactions))
         importer(filename, store)
+        store.close()
+
         if remove_input:
             os.remove(filename)
 
