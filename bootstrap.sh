@@ -10,7 +10,8 @@ pip_install () {
     ./bin/pip install $package==$version
 }
 
-rm -rf .Python bin lib include
-virtualenv --python python3 --no-site-packages --setuptools .
+rm -rf .Python bin lib include eggs develop-eggs
+python3 -m 'venv' .
 pip_install setuptools
 pip_install zc.buildout
+bin/buildout
