@@ -25,6 +25,7 @@ setup(
     mt940_csv = ynab_bank_import.mt940:import_account
     fiducia_csv = ynab_bank_import.fiducia:import_account
     sparkasse_cc = ynab_bank_import.sparkasse:import_cc
+    transferwise = ynab_bank_import.transferwise:do_import
     """,
     keywords='import bank accounting personal finance',
     zip_safe=False,
