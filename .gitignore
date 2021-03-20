@@ -1,0 +1,11 @@
+/bin/
+/include/
+/src/*.egg-info
+/lib/
+/eggs/
+/develop-eggs
+.installed.cfg
+.Python
+*.pyc
+*.sublime-workspace
+pyvenv.cfg
